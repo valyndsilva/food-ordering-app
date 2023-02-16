@@ -3070,3 +3070,120 @@ export default async function handler(req, res) {
 }
 
 ```
+
+## Implementing Cookie Authentication with NextJS:
+
+### Install dependencies:
+
+```
+npm install jsonwebtoken cookie
+npm i --save-dev @types/jsonwebtoken
+```
+
+### Create 2 variables in .env.local:
+
+```
+NODE_ENV=development
+JWT_SECRET=....
+```
+
+### Create pages/api/auth/login.tsx:
+
+```
+/* eslint-disable import/no-anonymous-default-export */
+import { sign } from "jsonwebtoken";
+import { serialize } from "cookie";
+
+const secret = process.env.JWT_SECRET;
+
+export default async function (req, res) {
+  const { username, password } = req.body;
+
+  // Check in the database
+  // if a user with this username
+  // and password exists
+  if (
+    username === process.env.ADMIN_USERNAME &&
+    password === process.env.ADMIN_PASSWORD
+  ) {
+    const token = sign(
+      {
+        exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 30, // 30 days
+        username: username,
+      },
+      secret
+    );
+
+    const serialised = serialize("authJWT", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV !== "development",
+      sameSite: "strict",
+      maxAge: 60 * 60 * 24 * 30,
+      path: "/",
+    });
+
+    res.setHeader("Set-Cookie", serialised);
+
+    res.status(200).json({ message: "Success!" });
+  } else {
+    res.json({ message: "Invalid credentials!" });
+  }
+}
+
+```
+
+### Create pages/api/auth/logout.tsx:
+
+```
+/* eslint-disable import/no-anonymous-default-export */
+import { serialize } from "cookie";
+
+export default async function (req, res) {
+  const { cookies } = req;
+
+  const jwt = cookies.authJWT;
+
+  if (!jwt) {
+    return res.json({ message: "You are already logged out..." });
+  } else {
+    const serialised = serialize("authJWT", null, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV !== "development",
+      sameSite: "strict",
+      maxAge: -1,
+      path: "/",
+    });
+
+    res.setHeader("Set-Cookie", serialised);
+
+    res.status(200).json({ message: "Successfuly logged out!" });
+  }
+}
+
+
+```
+
+### Create pages/api/user.tsx:
+
+```
+/* eslint-disable import/no-anonymous-default-export */
+export default async function (req, res) {
+  const { cookies } = req;
+
+  const jwt = cookies.authJWT;
+
+  if (!jwt) {
+    return res.json({ message: "Invalid token!" });
+  }
+
+  return res.json({ data: "Top secret data!" });
+}
+
+
+```
+
+## Implementing React Hook Form:
+
+```
+npm install react-hook-form
+```
