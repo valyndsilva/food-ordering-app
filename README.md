@@ -1,13 +1,11 @@
-# Food Ordering App ⚡
+# Food Ordering App (Pizza Rustica) ⚡
 
-This app lets you place orders online and also provides an admin dashboard to fulfill the orders received controlling each stage or the order process.
+This app lets you place orders online and also provides an admin dashboard to add, edit and remove new products, fulfill the orders received controlling each stage of the order process.
 
 ## Tech Stack Used:
 
 - [React](https://reactjs.org/)
 - [Next.js](https://nextjs.org/)
-- [Next-Auth](https://next-auth.js.org/)
-- [Next Themes](https://www.npmjs.com/package/next-themes)
 - [Typescript](https://www.typescriptlang.org/)
 - [Redux Toolkit](https://redux-toolkit.js.org/)
 - [Axios](https://axios-http.com/docs/intro)
@@ -53,6 +51,18 @@ Checkout the [demo here](https://food-ordering-app.valynsilva.com/)
 ![](/public/gifs/Add-New-Product.gif)
 
 [Expand](/public/demos/Add-New-Product.mp4)
+
+### Delete A Product:
+
+![](/public/gifs/delete-product.gif)
+
+[Expand](/public/demos/delete-product.mp4)
+
+### Update A Product:
+
+![](/public/gifs/update-product.gif)
+
+[Expand](/public/demos/update-product.mp4)
 
 ### Update Order Status:
 
