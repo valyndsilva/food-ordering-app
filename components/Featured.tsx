@@ -11,7 +11,7 @@ function Featured() {
 
   const [index, setIndex] = useState(0);
 
-  const handleArrow = (direction) => {
+  const handleArrow = (direction:string) => {
     if (direction === "left") {
       setIndex(index !== 0 ? index - 1 : 2);
     }

@@ -10,8 +10,11 @@ import { FaUser, FaUserCircle } from "react-icons/fa";
 import Router, { useRouter } from "next/router";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
+interface Props {
+  isLoggedIn: boolean;
+}
 
-function Header({ isLoggedIn }) {
+function Header({ isLoggedIn }: Props) {
   // console.log({ isLoggedIn });
 
   const dispatch = useDispatch();
@@ -28,7 +31,7 @@ function Header({ isLoggedIn }) {
   const [isNavOpen, setIsNavOpen] = useState(false);
   // console.log(isNavOpen);
 
-  const quantity = useSelector((state) => state.cart.cartQuantity);
+  const quantity = useSelector((state:any) => state.cart.cartQuantity);
 
   const router = useRouter();
 

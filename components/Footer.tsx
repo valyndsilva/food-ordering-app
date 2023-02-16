@@ -134,23 +134,23 @@ function Footer() {
         </Link>
 
         <Link href="#">
-          <span className="listItem rounded-full p-3 border" href="#">
+          <span className="listItem rounded-full p-3 border">
             <FaFacebookF className="w-6 h-6" />
           </span>
         </Link>
 
         <Link href="#">
-          <a className="listItem rounded-full p-3 border" href="#">
+          <a className="listItem rounded-full p-3 border">
             <BsTwitter className="w-6 h-6" />
           </a>
         </Link>
         <Link href="#">
-          <a className="listItem rounded-full p-3 border" href="#">
+          <a className="listItem rounded-full p-3 border">
             <FaTiktok className="w-6 h-6" />
           </a>
         </Link>
         <Link href="#">
-          <a className="listItem rounded-full p-3 border" href="#">
+          <a className="listItem rounded-full p-3 border">
             <BsInstagram className="w-6 h-6" />
           </a>
         </Link>

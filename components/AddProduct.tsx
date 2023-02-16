@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   addProduct,
   setAddExtra,
-  setAddExtraOptions,
   setDesc,
   setExtraOptions,
   setImg,
@@ -16,12 +15,13 @@ import {
   setToppingPrice,
 } from "../redux/slices/productSlice";
 import { setAddModal } from "../redux/slices/modalSlice";
-interface Props {}
-function AddProduct({}: Props) {
+
+
+function AddProduct() {
   const dispatch = useDispatch();
   const product = useSelector((state: any) => state.product);
   // console.log(product);
-  const [extraOptionsInput, setExtraOptionsInput] = useState([]);
+  const [extraOptionsInput, setExtraOptionsInput] = useState<any[]>([]);
   const changePrice = (e: React.ChangeEvent<HTMLInputElement>, index: any) => {
     console.log(index);
     // console.log(product.prices);

@@ -31,6 +31,7 @@ function Login({ isLoggedIn, myCookie }: Props) {
     await axios.post("/api/auth/login", credentials);
 
     handleGetUser();
+    
   };
 
   const handleGetUser = async () => {

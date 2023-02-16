@@ -6,7 +6,6 @@ import {
   setAddExtra,
   setDeleteExtra,
   setDesc,
-  setEditExtraOptions,
   setEditProduct,
   setExtraOptions,
   setImg,
@@ -23,7 +22,7 @@ function EditProduct({}: Props) {
   console.log(product);
   // product.id
   const editProduct = product.productList.filter(
-    (pizza) => pizza._id === product.productId && pizza
+    (pizza: { _id: any; }) => pizza._id === product.productId && pizza
   )[0];
   console.log({ editProduct });
   dispatch(setEditProduct(editProduct));
@@ -101,7 +100,7 @@ function EditProduct({}: Props) {
   const handleDeleteOption = (topping: string) => {
     console.log("option clicked to delete topping:", topping);
     const afterDeleteOptions = extraOptionsInput.filter(
-      (option) => option.topping !== topping
+      (option: { topping: string; }) => option.topping !== topping
     );
     console.log(afterDeleteOptions);
     dispatch(setExtraOptions(afterDeleteOptions));

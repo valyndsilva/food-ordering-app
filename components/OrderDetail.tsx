@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
-function OrderDetail({ total, createOrder }) {
+interface Props {
+  total: number;
+  createOrder: any;
+}
+function OrderDetail({ total, createOrder }: Props) {
   const [customer, setCustomer] = useState("");
   const [address, setAddress] = useState("");
   const cart = useSelector((state: any) => state.cart);
@@ -35,7 +39,6 @@ function OrderDetail({ total, createOrder }) {
           <label className="mb-2">Address</label>
           <textarea
             className="h-10  border p-2"
-            type="text"
             rows={5}
             placeholder="Elton St. 505 NY"
             onChange={(e) => setAddress(e.target.value)}
