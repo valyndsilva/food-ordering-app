@@ -38,10 +38,13 @@ function Index({ orders, products, isLoggedIn }: Props) {
   // console.log("productList:", product.productList);
   const productArr = product.productList;
   const router = useRouter();
+
   const handleDelete = async (id: string) => {
     try {
+  // await dbConnect();
+  //       await Product.findByIdAndDelete(id);
       await axios.delete("http://localhost:3000/api/products/" + id);
-      // setPizzaList(pizzaList.filter((pizza) => pizza._id !== id));
+
       dispatch(
         setProductList(productArr.filter((pizza: Product) => pizza._id !== id))
       );

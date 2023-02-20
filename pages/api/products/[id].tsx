@@ -2,7 +2,10 @@ import dbConnect from "../../../util/mongodb";
 import Product from "../../../models/Product";
 import { NextApiRequest, NextApiResponse } from "next";
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   const {
     method,
     query: { id },
@@ -17,13 +20,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     try {
       const product = await Product.findById(id);
       res.status(200).json(product);
-    } catch (err:any) {
+    } catch (err: any) {
       res.status(500).json({ message: err.message });
     }
   }
   if (method === "PUT") {
     console.log(req.body);
-    
+
     if (!token) {
       return res.status(401).json("Not authenticated!");
     }
@@ -36,7 +39,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       //   new: true,
       // }); //new:true returns the most updated version
       res.status(200).json(product);
-    } catch (err:any) {
+    } catch (err: any) {
       res.status(500).json({ message: err.message });
     }
   }
@@ -48,8 +51,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     try {
       await Product.findByIdAndDelete(id);
       res.status(200).json("The product has been deleted!");
-    } catch (err:any) {
+    } catch (err: any) {
       res.status(500).json({ message: err.message });
+      res.end();
     }
   }
 }
