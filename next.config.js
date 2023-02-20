@@ -4,8 +4,4 @@ module.exports = {
   images: {
     domains: ["res.cloudinary.com"],
   },
-  api: {
-    externalResolver: true,
-    bodyParser: false, // I added this
-  },
 };
