@@ -3187,3 +3187,14 @@ export default async function (req, res) {
 ```
 npm install react-hook-form
 ```
+
+## Add Env Variable to Vercel through Terminal:
+```
+npm install vercel
+vercel login
+vercel link
+Choose your project to be linked to.
+vercel env ls // Using the vercel env command to list all Environment Variables in a Vercel Project.
+vercel add env // Using the vercel env command to add an Environment Variable to a Vercel Project.
+Enter the name and value of the variable
+```
