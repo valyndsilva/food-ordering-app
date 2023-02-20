@@ -75,17 +75,17 @@ function Header({ isLoggedIn }: Props) {
               className="hidden 
             lg:flex md:p-0 md:bg-transparent md:flex-row md:space-x-6 "
             >
-              <Link href="#about">
+              <Link href="/#about">
                 <a className="listItem" href="#">
                   About
                 </a>
               </Link>
-              <Link href="#pizza-menu">
+              <Link href="/#plans">
                 <a className="listItem" href="#">
                   Menu
                 </a>
               </Link>
-              <Link href="#">
+              <Link href="/#contact">
                 <a className="listItem" href="#">
                   Contact
                 </a>
