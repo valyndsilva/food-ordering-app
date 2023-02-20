@@ -16,7 +16,6 @@ import {
 } from "../redux/slices/productSlice";
 import { setAddModal } from "../redux/slices/modalSlice";
 
-
 function AddProduct() {
   const dispatch = useDispatch();
   const product = useSelector((state: any) => state.product);
@@ -74,7 +73,7 @@ function AddProduct() {
     };
     console.log({ newProduct });
     dispatch(addProduct(newProduct));
-    await axios.post("http://localhost:3000/api/products", newProduct);
+    await axios.post("/api/products", newProduct);
 
     handleClose();
     router.replace(router.asPath); // update through ssr without refreshing page

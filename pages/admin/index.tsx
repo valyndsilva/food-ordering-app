@@ -42,7 +42,6 @@ function Index({ orders, products, isLoggedIn }: Props) {
   const handleDelete = async (id: string) => {
     try {
       await axios.delete("/api/products/" + id);
-
       dispatch(
         setProductList(productArr.filter((pizza: Product) => pizza._id !== id))
       );
