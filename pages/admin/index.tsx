@@ -6,6 +6,8 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AddButton, AddProduct, EditProduct } from "../../components";
+import Order from "../../models/Order";
+import Product from "../../models/Product";
 import { setIsAuthenticated } from "../../redux/slices/authSlice";
 import { setAddModal, setEditModal } from "../../redux/slices/modalSlice";
 import {
@@ -13,6 +15,7 @@ import {
   setProductId,
   setProductList,
 } from "../../redux/slices/productSlice";
+import dbConnect from "../../util/mongodb";
 
 interface Props {
   orders: Order[];
@@ -254,13 +257,30 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     isLoggedIn = true;
   }
 
-  const productRes = await axios.get("http://localhost:3000/api/products");
-  const orderRes = await axios.get("http://localhost:3000/api/orders");
+  await dbConnect();
+  /* Fetch existing data from mongoDB*/
+  const productsResult = await Product.find({});
+  const products = productsResult.reverse().map((doc) => {
+    const product = doc.toObject();
+    product._id = product._id.toString();
+    return product;
+  });
+
+  const ordersResult = await Order.find({});
+  const orders = ordersResult.reverse().map((doc) => {
+    const order = doc.toObject();
+    order._id = order._id.toString();
+    return order;
+  });
+  // const productRes = await axios.get("http://localhost:3000/api/products");
+  // const orderRes = await axios.get("http://localhost:3000/api/orders");
 
   return {
     props: {
-      orders: orderRes.data,
-      products: productRes.data,
+      // orders: orderRes.data,
+      orders: JSON.parse(JSON.stringify(orders)),
+      // products: productRes.data,
+      products: JSON.parse(JSON.stringify(products)),
       isLoggedIn: isLoggedIn,
     },
   };

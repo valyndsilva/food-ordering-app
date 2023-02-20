@@ -3189,6 +3189,7 @@ npm install react-hook-form
 ```
 
 ## Add Env Variable to Vercel through Terminal:
+
 ```
 npm install vercel
 vercel login
@@ -3198,3 +3199,11 @@ vercel env ls // Using the vercel env command to list all Environment Variables 
 vercel add env // Using the vercel env command to add an Environment Variable to a Vercel Project.
 Enter the name and value of the variable
 ```
+
+Add the following environment variables to your project
+ADMIN_USERNAME=
+ADMIN_PASSWORD=
+JWT_SECRET=
+NODE_ENV=
+
+To add MONGODB_URI= Go to Vercel Dashboard > Choose your project > Settings > Integrations > Browse Marketplace > MongoDb > Add Integration > Choose specific project > Follow steps. The MONGODB_URI env variable will be automatically added to the Vercel env variables.
