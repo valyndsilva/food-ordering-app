@@ -2,10 +2,13 @@ import axios from "axios";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import moment from "moment";
+import dbConnect from "../../util/mongodb";
+import { GetServerSideProps } from "next";
+import Order from "../../models/Order";
 interface Props {
   order: Order;
 }
-function Order({ order }: Props) {
+function OrderId({ order }: Props) {
   // To fix hydration UI mismatch issues, we need to wait until the component has mounted.
   const [mounted, setMounted] = useState(false);
 
@@ -143,15 +146,19 @@ function Order({ order }: Props) {
   );
 }
 
-export default Order;
+export default OrderId;
 
 // Fetch a single order
-export const getServerSideProps = async ({ params }: any) => {
-  const res = await axios.get(`http://localhost:3000/api/orders/${params.id}`);
-  const order = res.data;
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+  const id = params!.id;
+  await dbConnect();
+  const order = await Order.findById(id);
+
+  // const res = await axios.get(`http://localhost:3000/api/orders/${params.id}`);
+  // const order = res.data;
   return {
     props: {
-      order: order,
+      order: JSON.parse(JSON.stringify(order)),
     },
   };
 };
