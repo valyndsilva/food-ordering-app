@@ -4,11 +4,13 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { addProduct } from "../../redux/slices/cartSlice";
 import { GetServerSideProps } from "next";
+import dbConnect from "../../util/mongodb";
+import Product from "../../models/Product";
 
 interface Props {
   pizza: Product;
 }
-function Product({ pizza }: Props) {
+function ProductId({ pizza }: Props) {
   console.log(pizza);
 
   const [size, setSize] = useState(0);
@@ -147,18 +149,25 @@ function Product({ pizza }: Props) {
   );
 }
 
-export default Product;
+export default ProductId;
 
 // Fetch a single product
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+ 
   const id = params!.id;
-  const res = await axios.get(
-    `http://localhost:3000/api/products/${id}`
-  );
-  const pizza = res.data;
+  await dbConnect();
+  /* Fetch existing data from mongoDB*/
+  const product = await Product.findById(id);
+
+  // const res = await axios.get(
+  //   `http://localhost:3000/api/products/${id}`
+  // );
+  // const pizza = res.data;
+  
   return {
     props: {
-      pizza: pizza,
+      // pizza: pizza,
+      pizza: JSON.parse(JSON.stringify(product)),
     },
   };
 };

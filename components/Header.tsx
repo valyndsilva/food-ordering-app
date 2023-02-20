@@ -31,7 +31,7 @@ function Header({ isLoggedIn }: Props) {
   const [isNavOpen, setIsNavOpen] = useState(false);
   // console.log(isNavOpen);
 
-  const quantity = useSelector((state:any) => state.cart.cartQuantity);
+  const quantity = useSelector((state: any) => state.cart.cartQuantity);
 
   const router = useRouter();
 
@@ -162,6 +162,13 @@ function Header({ isLoggedIn }: Props) {
                     <span className="">Contact</span>
                   </a>
                 </Link>
+                {isLoggedIn && (
+                  <Link href="/admin">
+                    <a className="hover:text-red-200  py-4 px-4">
+                      <span className="">Dashboard</span>
+                    </a>
+                  </Link>
+                )}
               </div>
             </div>
           </div>

@@ -3207,3 +3207,13 @@ JWT_SECRET=
 NODE_ENV=
 
 To add MONGODB_URI= Go to Vercel Dashboard > Choose your project > Settings > Integrations > Browse Marketplace > MongoDb > Add Integration > Choose specific project > Follow steps. The MONGODB_URI env variable will be automatically added to the Vercel env variables.
+
+
+mongodb+srv://vercel-admin-user-63f358caf76e3b1eea3cf6f3:4PjHYcVMnHCKJeg2@cluster0.kh17psb.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
+
+mongodb+srv://valyndsilva:valyndsilva@cluster0.kh17psb.mongodb.net/?retryWrites=true&w=majority
+
+Configure a db cluster in MongoDB:
+brew install mongodb-atlas
+atlas auth login
+
