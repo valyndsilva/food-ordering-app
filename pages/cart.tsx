@@ -11,6 +11,7 @@ import {
 import { useRouter } from "next/router";
 import axios from "axios";
 import { Header, OrderDetail } from "../components";
+import Order from "../models/Order";
 
 interface IBtn {
   currency: any;
@@ -36,7 +37,7 @@ function Cart({ isLoggedIn }: Props) {
 
   const createOrder = async (data: any) => {
     try {
-      const res = await axios.post("http://localhost:3000/api/orders", data);
+      const res = await axios.post("/api/orders", data);
       res.status === 201 && router.push("/order/" + res.data._id);
       dispatch(reset());
     } catch (err) {

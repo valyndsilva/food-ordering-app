@@ -120,7 +120,7 @@ function EditProduct({}: Props) {
     };
     console.log(updateProduct);
     await axios.put(
-      "http://localhost:3000/api/products/" + product.productId,
+      "/api/products/" + product.productId,
       updateProduct
     );
 
