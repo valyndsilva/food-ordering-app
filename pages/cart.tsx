@@ -48,7 +48,6 @@ function Cart({ isLoggedIn }: Props) {
   // const amount = "2";
   const amount = cart.total;
   const currency = "USD";
-  const style = { layout: "vertical" };
 
   // Custom component to wrap the PayPalButtons and handle currency changes
   const ButtonWrapper = ({ currency, showSpinner }: IBtn) => {
@@ -70,9 +69,9 @@ function Cart({ isLoggedIn }: Props) {
       <>
         {showSpinner && isPending && <div className="spinner" />}
         <PayPalButtons
-          style={style}
+          style={{ layout: "vertical" }}
           disabled={false}
-          forceReRender={[amount, currency, style]}
+          forceReRender={[amount, currency, { layout: "vertical" }]}
           fundingSource={undefined}
           createOrder={(data, actions) => {
             return actions.order

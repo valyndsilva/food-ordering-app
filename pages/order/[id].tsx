@@ -2,8 +2,10 @@ import axios from "axios";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import moment from "moment";
-
-function Order({ order }) {
+interface Props {
+  order: Order;
+}
+function Order({ order }: Props) {
   // To fix hydration UI mismatch issues, we need to wait until the component has mounted.
   const [mounted, setMounted] = useState(false);
 
@@ -15,7 +17,7 @@ function Order({ order }) {
   // const status = 0;
   const status = order?.status;
 
-  const statusClass = (index) => {
+  const statusClass = (index: number) => {
     if (index - status < 1) return "done flex flex-col items-center mb-5";
     if (index - status === 1)
       return "inProgress flex flex-col items-center mb-5  animate-pulse";
@@ -23,10 +25,16 @@ function Order({ order }) {
       return "undone mb-5  flex flex-col items-center opacity-30";
   };
   return (
-    <div className="w-full flex-col p-12 md:inline-flex">
-      <table className="w-full flex flex-row flex-no-wrap sm:bg-white rounded-lg overflow-hidden sm:shadow-lg my-5 md:inline-table">
+    <div className="w-full flex-col p-12 lg:inline-flex">
+      <h1 className="text-4xl py-4">Thank you for your order!</h1>
+      <p className="text-md">
+        Thanks for ordering with Pizza Rustica! Your order has been received and
+        is being prepared. You'll receive a confirmation email shortly with all
+        the details. Your order details are below. Enjoy your pizza!
+      </p>
+      <table className="w-full flex flex-row flex-nowrap sm:bg-white rounded-lg overflow-hidden sm:shadow-lg my-5 lg:inline-table">
         <thead className="text-white">
-          <tr className="bg-red-400 flex flex-col flex-no wrap md:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
+          <tr className="bg-red-400 flex flex-col flex-no wrap lg:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
             <th className="border p-5 text-left">Order ID</th>
             <th className="border p-5 text-left">Customer Name</th>
             <th className="border p-5 text-left">Address</th>
@@ -34,8 +42,8 @@ function Order({ order }) {
             <th className="border p-5 text-left">Total</th>
           </tr>
         </thead>
-        <tbody className="flex-1 sm:flex-none">
-          <tr className="flex flex-col flex-no wrap md:table-row mb-5 mb:mb-0">
+        <tbody className="flex-1 ">
+          <tr className="flex flex-col flex-nowrap lg:table-row mb-5 mb:mb-0">
             <td className="border-grey-light border hover:bg-gray-100 p-5 truncate">
               <span className="font-medium text-[#d1411e] md:text-lg">
                 {order?._id}
@@ -62,6 +70,7 @@ function Order({ order }) {
           </tr>
         </tbody>
       </table>
+      <h1 className="text-2xl py-4">Order Status:</h1>
       <div className="w-full flex-col items-center justify-evenly py-10 border md:inline-flex md:flex-row">
         <div className={statusClass(0)}>
           <Image src="/assets/paid.png" width={30} height={30} alt="" />
@@ -130,11 +139,6 @@ function Order({ order }) {
           Paid
         </button>
       </div>
-      <p>
-        Thanks for ordering with Pizza Rustica! Your order has been received and
-        is being prepared. You'll receive a confirmation email shortly with all
-        the details. Enjoy your pizza!
-      </p>
     </div>
   );
 }
@@ -142,7 +146,7 @@ function Order({ order }) {
 export default Order;
 
 // Fetch a single order
-export const getServerSideProps = async ({ params }) => {
+export const getServerSideProps = async ({ params }: any) => {
   const res = await axios.get(`http://localhost:3000/api/orders/${params.id}`);
   const order = res.data;
   return {

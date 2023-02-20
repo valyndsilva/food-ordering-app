@@ -1,19 +1,20 @@
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, SetStateAction, ChangeEvent } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { addProduct } from "../../redux/slices/cartSlice";
+import { GetServerSideProps } from "next";
 
 interface Props {
   pizza: Product;
 }
 function Product({ pizza }: Props) {
-  // console.log(pizza);
+  console.log(pizza);
 
   const [size, setSize] = useState(0);
   const [price, setPrice] = useState(pizza.prices[0]);
-  const [qty, setQty] = useState(1);
-  const [extras, setExtras] = useState([]);
+  const [qty, setQty] = useState("1");
+  const [extras, setExtras] = useState<any[]>([]);
 
   const dispatch = useDispatch();
 
@@ -33,23 +34,23 @@ function Product({ pizza }: Props) {
   //   desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis arcu purus, rhoncus fringilla vestibulum vel, dignissim vel ante. Nulla facilisi. Nullam a urna sit amet tellus pellentesque egestas in in ante.",
   // };
 
-  const changePrice = (number) => {
+  const changePrice = (number: number) => {
     setPrice(price + number);
   };
 
-  const handleSize = (sizeIndex) => {
+  const handleSize = (sizeIndex: any) => {
     const diff = pizza.prices[sizeIndex] - pizza.prices[size];
     setSize(sizeIndex);
     changePrice(diff);
   };
-  const handleChange = (e, option) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>, option: any) => {
     const checked = e.target.checked;
     if (checked) {
       changePrice(option.toppingPrice);
       setExtras((prev) => [...prev, option]);
     } else {
       changePrice(-option.toppingPrice);
-      setExtras(extras.filter((extra) => extra._id !== option._id));
+      setExtras(extras.filter((extra: any) => extra._id !== option._id));
     }
   };
   // console.log(extras);
@@ -149,9 +150,10 @@ function Product({ pizza }: Props) {
 export default Product;
 
 // Fetch a single product
-export const getServerSideProps = async ({ params }) => {
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+  const id = params!.id;
   const res = await axios.get(
-    `http://localhost:3000/api/products/${params.id}`
+    `http://localhost:3000/api/products/${id}`
   );
   const pizza = res.data;
   return {

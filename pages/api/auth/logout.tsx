@@ -2,7 +2,6 @@
 import { serialize } from "cookie";
 import { NextApiRequest, NextApiResponse } from "next";
 
-
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -14,7 +13,7 @@ export default async function handler(
   if (!jwt) {
     return res.json({ message: "You are already logged out..." });
   } else {
-    const serialised = serialize("userToken", null, {
+    const serialised = serialize("userToken", "", {
       httpOnly: true,
       secure: process.env.NODE_ENV !== "development",
       sameSite: "strict",
