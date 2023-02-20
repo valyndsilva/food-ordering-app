@@ -147,27 +147,45 @@ function Header({ isLoggedIn }: Props) {
           <div className={isNavOpen ? "showMenuNav" : "hideMenuNav"}>
             <div className="flex flex-col lg:hidden space-x-8 items-center z-100">
               <div className="fixed right-0 top-[6rem] bg-[#3E2823] border-t py-4 px-12 flex flex-col items-center justify-center space-y-12 w-full h-screen text-white">
-                <Link href="#plans">
-                  <a className="hover:text-red-200  py-4 px-4">
-                    <span className="">About </span>
-                  </a>
-                </Link>
-                <Link href="#menu">
-                  <a className="hover:text-red-200  py-4 px-4">
-                    <span className="">Menu </span>
-                  </a>
-                </Link>
-                <Link href="#testimonials">
-                  <a className="hover:text-red-200  py-4 px-4">
-                    <span className="">Contact</span>
-                  </a>
-                </Link>
+                <span
+                  className="hover:text-red-200  py-4 px-4"
+                  onClick={() => {
+                    setIsNavOpen(false);
+                    router.push("/#about");
+                  }}
+                >
+                  <span className="">About</span>
+                </span>
+                <span
+                  className="hover:text-red-200  py-4 px-4"
+                  onClick={() => {
+                    setIsNavOpen(false);
+                    router.push("/#plans");
+                  }}
+                >
+                  <span className="">Menu</span>
+                </span>
+
+                <span
+                  className="hover:text-red-200  py-4 px-4"
+                  onClick={() => {
+                    setIsNavOpen(false);
+                    router.push("/#contact");
+                  }}
+                >
+                  <span className="">Contact</span>
+                </span>
+
                 {isLoggedIn && (
-                  <Link href="/admin">
-                    <a className="hover:text-red-200  py-4 px-4">
-                      <span className="">Dashboard</span>
-                    </a>
-                  </Link>
+                  <span
+                    onClick={() => {
+                      setIsNavOpen(false);
+                      router.push("/admin");
+                    }}
+                    className="hover:text-red-200  py-4 px-4"
+                  >
+                    <span className="">Dashboard</span>
+                  </span>
                 )}
               </div>
             </div>
